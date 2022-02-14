@@ -86,7 +86,7 @@ def call(Map pipelineParams) {
 
 			stage('Build Docker Image') {
 				steps {
-					sh 'dotnet build $pipelineParams.buildProjectName -c $BuildConfiguration -t:ContainerBuild -p:DockerfileTag="$ImageName:${TAG}" --no-restore '
+					sh 'dotnet build ${pipelineParams.buildProjectName} -c $BuildConfiguration -t:ContainerBuild -p:DockerfileTag="$ImageName:${TAG}" --no-restore '
 				}
 			}
 
