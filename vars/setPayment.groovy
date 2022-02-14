@@ -6,7 +6,6 @@ def call(Map pipelineParams) {
 
 		environment {
 			BuildConfiguration = "Debug"
-			ImageName=pipelineParams.imageName
 		}
 		stages {
 			stage('Prepare'){
@@ -80,20 +79,20 @@ def call(Map pipelineParams) {
 				}
 
 				steps {
-					sh 'dotnet pack -c $BuildConfiguration pipelineParams.pushPackagePath/pipelineParams.pushPackageName --no-build'
-					sh 'dotnet nuget push pipelineParams.pushPackagePath/bin/$BuildConfiguration/*.nupkg" --source "raypro" --skip-duplicate'
+					sh 'dotnet pack -c $BuildConfiguration $pipelineParams.pushPackagePath/$pipelineParams.pushPackageName --no-build'
+					sh 'dotnet nuget push $pipelineParams.pushPackagePath/bin/$BuildConfiguration/*.nupkg" --source "raypro" --skip-duplicate'
 				}
 			}
 
 			stage('Build Docker Image') {
 				steps {
-					sh 'dotnet build pipelineParams.buildProjectName -c $BuildConfiguration -t:ContainerBuild -p:DockerfileTag="$ImageName:${TAG}" --no-restore '
+					sh 'dotnet build $pipelineParams.buildProjectName -c $BuildConfiguration -t:ContainerBuild -p:DockerfileTag="$ImageName:${TAG}" --no-restore '
 				}
 			}
 
 			stage('Push Docker Image') {
 				steps {
-					sh 'sudo docker push $ImageName:${TAG}'
+					sh 'sudo docker push $pipelineParams.imageName:${TAG}'
 				}
 			}
 
