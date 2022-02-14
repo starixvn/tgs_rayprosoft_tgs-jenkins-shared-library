@@ -120,8 +120,8 @@ def call(Map pipelineParams) {
 						println resources
 
 						withKubeConfig([credentialsId: env.k8s_config]) {
-							pipelineParams.helmPrintExec(${resources})
-							pipelineParams.helmRunExec(${resources})
+							pipelineParams.helmPrintExec(resources)
+							pipelineParams.helmRunExec(resources)
 						}
 					}
 				}
