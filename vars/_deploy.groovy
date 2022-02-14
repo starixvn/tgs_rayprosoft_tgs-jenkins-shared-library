@@ -7,6 +7,7 @@ def call(Map pipelineParams) {
 		environment {
 			BuildConfiguration = "Debug"
 		}
+		
 		stages {
 			stage('Prepare'){
 				steps {
@@ -74,7 +75,7 @@ def call(Map pipelineParams) {
 			stage('Push packages') {
 				when {
 					expression {
-						return env.kube_ns == 'dev';
+						return env.kube_ns == 'dev' && pipelineParams.pushPackageName!="";
 					}
 				}
 
