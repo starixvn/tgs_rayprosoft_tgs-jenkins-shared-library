@@ -79,8 +79,8 @@ def call(Map pipelineParams) {
 				}
 
 				steps {
-					sh 'dotnet pack -c $BuildConfiguration $pipelineParams.pushPackagePath/$pipelineParams.pushPackageName --no-build'
-					sh 'dotnet nuget push $pipelineParams.pushPackagePath/bin/$BuildConfiguration/*.nupkg" --source "raypro" --skip-duplicate'
+					sh 'dotnet pack -c $BuildConfiguration ${pipelineParams.pushPackagePath}/${pipelineParams.pushPackageName} --no-build'
+					sh 'dotnet nuget push ${pipelineParams.pushPackagePath}/bin/$BuildConfiguration/*.nupkg" --source "raypro" --skip-duplicate'
 				}
 			}
 
