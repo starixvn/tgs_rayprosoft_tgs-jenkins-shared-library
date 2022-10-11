@@ -8,15 +8,15 @@ def call() {
 				{
 					case ['main', 'origin/main']:
 						env.kube_ns = "prod";
-						env.k8s_config = 'stag-k8s-config';
+						env.k8s_config = 'prod-k8s-config';
 						env.node_selector = '{ "dedicated": "prod" }';
 						env.dedicated = '{"effect":"NoSchedule","key": "dedicated", "operator": "Equal", "value": "prod"}';
 						break;
 					case ['release', 'origin/release']:
 						env.kube_ns = "staging";
 						env.k8s_config = 'stag-k8s-config';
-						env.node_selector = '{ "dedicated": "nonprod" }';
-						env.dedicated = '{"effect":"NoSchedule","key": "dedicated", "operator": "Equal", "value": "noprod"}';
+						env.node_selector = '{ "dedicated": "staging" }';
+						env.dedicated = '{"effect":"NoSchedule","key": "dedicated", "operator": "Equal", "value": "staging"}';
 						break;
 					default:
 						env.kube_ns = "dev";
