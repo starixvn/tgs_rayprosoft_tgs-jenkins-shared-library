@@ -2,6 +2,9 @@ def call(message) {
     def encodedMessage = URLEncoder.encode(message, "UTF-8")
     withCredentials([string(credentialsId: "telegram-token", variable: "TOKEN"), string(credentialsId: "telegram-chatid", variable: "CHAT_ID")]) {
 
+        echo "Token=${TOKEN}"
+        echo "CHAT_ID=${CHAT_ID}"
+
         response = httpRequest (consoleLogResponseBody: true,
                 contentType: 'APPLICATION_JSON',
                 httpMode: 'GET',
