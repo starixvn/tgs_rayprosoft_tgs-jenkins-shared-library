@@ -1,5 +1,4 @@
 def call(componentArray) {
-    def createMessage(componentArray) {
     def message = """   
 Branch: ${env.GIT_BRANCH}
 Image: ${Image}
@@ -13,5 +12,4 @@ Component:
     }
 
     return message
-}
 }
