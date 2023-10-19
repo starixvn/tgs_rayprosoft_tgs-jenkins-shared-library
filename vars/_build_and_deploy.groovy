@@ -12,7 +12,7 @@ def call(Map params) {
           Api_Service_Branch="develop"
           kube_ns = getKubeNamespace(env.GIT_BRANCH)
           k8s_config = getKubeConfig(env.GIT_BRANCH)
-          component=params.components
+          
           commit_url = "${env.GIT_URL.replace('.git', '/-/commit/')}${env.GIT_COMMIT}"
         }
     
@@ -34,6 +34,7 @@ def call(Map params) {
                         envItems.each { key, value -> 
                             env."tgs_${key}" = value;
                         }
+                        def component=params.components
                         componentArray = "${env."tgs_${component}"}".split(",")
                         
                         echo "components: ${componentArray.join(', ')}"
