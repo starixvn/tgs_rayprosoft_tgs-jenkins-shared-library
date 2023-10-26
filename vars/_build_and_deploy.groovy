@@ -8,7 +8,7 @@ def call(Map params) {
           TAG = sh(script: "echo `date +%Y-%m%d-%H%M`", returnStdout: true).trim()
           Registry = "pgtgs/"
           dockerhub = credentials('dockerhub')
-          Image = "${env.JOB_NAME.replace('/', '-').substring(0, 20).toLowerCase()}"
+          Image = "${env.JOB_NAME.replace('/', '-').replace("%2f", "-").toLowerCase()}"
           Api_Service_Branch="develop"
           kube_ns = getKubeNamespace(env.GIT_BRANCH)
           k8s_config = getKubeConfig(env.GIT_BRANCH)
